@@ -2,6 +2,14 @@
 <!DOCTYPE TS>
 <TS version="2.0" language="fr_FR">
 <context>
+    <name>QObject</name>
+    <message>
+        <location filename="../../trikGui/trikGuiMain.cpp" line="39"/>
+        <source>Graphical user interface, TRIK Studio runtime environment and script runner of a robot</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>trikGui::CommunicationSettingsWidget</name>
     <message>
         <location filename="../../trikGui/communicationSettingsWidget.cpp" line="25"/>
@@ -42,43 +50,25 @@
 <context>
     <name>trikGui::Controller</name>
     <message>
-        <location filename="../../trikGui/controller.cpp" line="143"/>
+        <location filename="../../trikGui/controller.cpp" line="127"/>
         <source>direct command</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>trikGui::FileManagerMessageBox</name>
-    <message>
-        <location filename="../../trikGui/fileManagerMessageBox.cpp" line="37"/>
-        <source>Do you want to open or delete the file?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../trikGui/fileManagerMessageBox.cpp" line="39"/>
-        <source>Open</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../trikGui/fileManagerMessageBox.cpp" line="40"/>
-        <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>trikGui::FileManagerWidget</name>
     <message>
-        <location filename="../../trikGui/fileManagerWidget.cpp" line="78"/>
+        <location filename="../../trikGui/fileManagerWidget.cpp" line="87"/>
         <source>File Manager</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../trikGui/fileManagerWidget.cpp" line="102"/>
+        <location filename="../../trikGui/fileManagerWidget.cpp" line="111"/>
         <source>Confirm deletion</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../trikGui/fileManagerWidget.cpp" line="103"/>
+        <location filename="../../trikGui/fileManagerWidget.cpp" line="112"/>
         <source>Are you sure you want to delete file?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -129,27 +119,27 @@
 <context>
     <name>trikGui::LanguageSelectionWidget</name>
     <message>
-        <location filename="../../trikGui/languageSelectionWidget.cpp" line="38"/>
+        <location filename="../../trikGui/languageSelectionWidget.cpp" line="40"/>
         <source>Select language:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../trikGui/languageSelectionWidget.cpp" line="44"/>
+        <location filename="../../trikGui/languageSelectionWidget.cpp" line="46"/>
         <source>English</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../trikGui/languageSelectionWidget.cpp" line="75"/>
+        <location filename="../../trikGui/languageSelectionWidget.cpp" line="77"/>
         <source>Language</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../trikGui/languageSelectionWidget.cpp" line="92"/>
+        <location filename="../../trikGui/languageSelectionWidget.cpp" line="94"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../trikGui/languageSelectionWidget.cpp" line="93"/>
+        <location filename="../../trikGui/languageSelectionWidget.cpp" line="95"/>
         <source>GUI will now restart</source>
         <translation type="unfinished"></translation>
     </message>
@@ -290,22 +280,22 @@
 <context>
     <name>trikGui::WiFiAPWidget</name>
     <message>
-        <location filename="../../trikGui/wiFiAPWidget.cpp" line="37"/>
+        <location filename="../../trikGui/wiFiAPWidget.cpp" line="39"/>
         <source>Network parameters</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../trikGui/wiFiAPWidget.cpp" line="38"/>
+        <location filename="../../trikGui/wiFiAPWidget.cpp" line="40"/>
         <source>Name not found</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../trikGui/wiFiAPWidget.cpp" line="39"/>
+        <location filename="../../trikGui/wiFiAPWidget.cpp" line="41"/>
         <source>Password not found</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../trikGui/wiFiAPWidget.cpp" line="40"/>
+        <location filename="../../trikGui/wiFiAPWidget.cpp" line="42"/>
         <source>IP address not found</source>
         <translation type="unfinished"></translation>
     </message>
@@ -315,12 +305,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../trikGui/wiFiAPWidget.cpp" line="72"/>
+        <location filename="../../trikGui/wiFiAPWidget.cpp" line="74"/>
         <source>Password: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../trikGui/wiFiAPWidget.cpp" line="82"/>
+        <location filename="../../trikGui/wiFiAPWidget.cpp" line="84"/>
         <source>IP address: </source>
         <translation type="unfinished"></translation>
     </message>
@@ -328,22 +318,27 @@
 <context>
     <name>trikGui::WiFiClientWidget</name>
     <message>
-        <location filename="../../trikGui/wiFiClientWidget.cpp" line="59"/>
+        <location filename="../../trikGui/wiFiClientWidget.cpp" line="61"/>
         <source>IP:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../trikGui/wiFiClientWidget.cpp" line="62"/>
+        <location filename="../../trikGui/wiFiClientWidget.cpp" line="64"/>
+        <source>Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../trikGui/wiFiClientWidget.cpp" line="69"/>
         <source>Available networks:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../trikGui/wiFiClientWidget.cpp" line="143"/>
+        <location filename="../../trikGui/wiFiClientWidget.cpp" line="154"/>
         <source>connecting...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../trikGui/wiFiClientWidget.cpp" line="148"/>
+        <location filename="../../trikGui/wiFiClientWidget.cpp" line="159"/>
         <source>no connection</source>
         <translation type="unfinished"></translation>
     </message>
@@ -377,23 +372,23 @@ failed</source>
 <context>
     <name>trikGui::WiFiModeWidget</name>
     <message>
-        <location filename="../../trikGui/wiFiModeWidget.cpp" line="33"/>
+        <location filename="../../trikGui/wiFiModeWidget.cpp" line="34"/>
         <source>Choose mode:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../trikGui/wiFiModeWidget.cpp" line="35"/>
-        <location filename="../../trikGui/wiFiModeWidget.cpp" line="62"/>
+        <location filename="../../trikGui/wiFiModeWidget.cpp" line="36"/>
+        <location filename="../../trikGui/wiFiModeWidget.cpp" line="63"/>
         <source>Wi-Fi client</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../trikGui/wiFiModeWidget.cpp" line="36"/>
+        <location filename="../../trikGui/wiFiModeWidget.cpp" line="37"/>
         <source>Wi-Fi access point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../trikGui/wiFiModeWidget.cpp" line="50"/>
+        <location filename="../../trikGui/wiFiModeWidget.cpp" line="51"/>
         <source>Network Config</source>
         <translation type="unfinished"></translation>
     </message>
