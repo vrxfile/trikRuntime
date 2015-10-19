@@ -26,6 +26,7 @@
 #include <trikControl/brickFactory.h>
 #include <trikNetwork/mailboxFactory.h>
 #include <trikNetwork/gamepadFactory.h>
+#include <trikWiFi/trikWiFi.h>
 
 #include "runningWidget.h"
 
@@ -54,7 +55,16 @@ Controller::Controller(const QString &configPath)
 
 	mCommunicator.reset(new trikCommunicator::TrikCommunicator(*mScriptRunner));
 
+	mWiFi.reset(new trikWiFi::TrikWiFi("/tmp/trikwifi", "/var/run/wpa_supplicant/wlan0", this));
+	connect(mWiFi.data(), SIGNAL(connected()), this, SIGNAL(wiFiConnected()));
+	connect(mWiFi.data(), SIGNAL(disconnected()), this, SIGNAL(wiFiDisconnected()));
+
 	connect(mCommunicator.data(), SIGNAL(stopCommandReceived()), this, SLOT(abortExecution()));
+	connect(mCommunicator.data(), SIGNAL(connected()), this, SLOT(updateCommunicatorStatus()));
+	connect(mCommunicator.data(), SIGNAL(disconnected()), this, SLOT(updateCommunicatorStatus()));
+	connect(mTelemetry.data(), SIGNAL(connected()), this, SLOT(updateCommunicatorStatus()));
+	connect(mTelemetry.data(), SIGNAL(disconnected()), this, SLOT(updateCommunicatorStatus()));
+	connect(mMailbox.data(), SIGNAL(connectionStatusChanged(bool)), this, SIGNAL(mailboxStatusChanged(bool)));
 
 	connect(mScriptRunner.data(), SIGNAL(completed(QString, int)), this, SLOT(scriptExecutionCompleted(QString, int)));
 
@@ -107,6 +117,21 @@ trikNetwork::MailboxInterface *Controller::mailbox()
 	return mMailbox.data();
 }
 
+trikWiFi::TrikWiFi &Controller::wiFi()
+{
+	return *mWiFi;
+}
+
+bool Controller::communicatorConnectionStatus()
+{
+	return mTelemetry->activeConnections() > 0 && mCommunicator->activeConnections() > 0;
+}
+
+void Controller::updateCommunicatorStatus()
+{
+	emit communicatorStatusChanged(communicatorConnectionStatus());
+}
+
 void Controller::scriptExecutionCompleted(const QString &error, int scriptId)
 {
 	if (error.isEmpty()) {
@@ -114,6 +139,16 @@ void Controller::scriptExecutionCompleted(const QString &error, int scriptId)
 	} else {
 		mCommunicator->sendMessage("error: " + error);
 		emit showError(error, scriptId);
+	}
+
+	mBrick->reset();
+
+	if (mMailbox) {
+		mMailbox->clearQueue();
+	}
+
+	if (mGamepad) {
+		mGamepad->reset();
 	}
 }
 

@@ -23,6 +23,10 @@
 
 #include "lazyMainWidget.h"
 
+namespace trikWiFi {
+class TrikWiFi;
+}
+
 namespace trikGui {
 
 class RunningWidget;
@@ -50,8 +54,14 @@ public:
 	/// Does not pass ownership to the caller.
 	trikNetwork::MailboxInterface *mailbox();
 
+	/// Reference to WiFi manager.
+	trikWiFi::TrikWiFi &wiFi();
+
 	/// Asks controller to correctly close given running widget.
 	void doCloseRunningWidget(MainWidget &widget);
+
+	/// Returns communicator connection status (whether or not both Telemetry and Communicator servers are connected).
+	bool communicatorConnectionStatus();
 
 public slots:
 	/// Cancels execution of current program.
@@ -77,11 +87,26 @@ signals:
 	/// clutter from videosensors.
 	void brickStopped();
 
+	/// Emitted when a robot is connected to a network.
+	void wiFiConnected();
+
+	/// Emitted when a robot is disconnected from a network.
+	void wiFiDisconnected();
+
+	/// Emitted when Telemetry and Communicator servers' status changes.
+	/// @param status - true if both servers are connected.
+	void communicatorStatusChanged(bool status);
+
+	/// Emitted when Mailbox server's status changes.
+	void mailboxStatusChanged(bool connected);
+
 private slots:
 	void scriptExecutionCompleted(const QString &error, int scriptId);
 
 	void scriptExecutionFromFileStarted(const QString &fileName, int scriptId);
 	void directScriptExecutionStarted(int scriptId);
+
+	void updateCommunicatorStatus();
 
 private:
 	QScopedPointer<trikControl::BrickInterface> mBrick;
@@ -90,6 +115,7 @@ private:
 	QScopedPointer<trikScriptRunner::TrikScriptRunner> mScriptRunner;
 	QScopedPointer<trikCommunicator::TrikCommunicator> mCommunicator;
 	QScopedPointer<trikTelemetry::TrikTelemetry> mTelemetry;
+	QScopedPointer<trikWiFi::TrikWiFi> mWiFi;
 
 	QHash<int, RunningWidget *> mRunningWidgets;  // Has ownership.
 };

@@ -46,6 +46,8 @@ HEADERS += \
 	$$PWD/wiFiClientWidget.h \
 	$$PWD/wiFiInitWidget.h \
 	$$PWD/wiFiModeWidget.h \
+	$$PWD/wiFiIndicator.h \
+	$$PWD/openSocketIndicator.h \
 
 SOURCES += \
 	$$PWD/backgroundWidget.cpp \
@@ -77,6 +79,8 @@ SOURCES += \
 	$$PWD/wiFiClientWidget.cpp \
 	$$PWD/wiFiInitWidget.cpp \
 	$$PWD/wiFiModeWidget.cpp \
+	$$PWD/wiFiIndicator.cpp \
+	$$PWD/openSocketIndicator.cpp \
 
 TRANSLATIONS = \
 	$$PWD/../translations/ru/trikGui_ru.ts \

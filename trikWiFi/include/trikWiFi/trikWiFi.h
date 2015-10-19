@@ -115,6 +115,12 @@ public:
 	/// Returns a list of networks from wpa_supplicant config.
 	QList<NetworkConfiguration> listNetworks();
 
+	/// Disposes an old connection to wpa_supplicant and creates a new one.
+	void reinit();
+
+	/// Closes the connection to wpa_supplicant.
+	void dispose();
+
 signals:
 	/// Emitted when scanning for available networks initiated by scan() is finished and results are available
 	/// and ready to be obtained by scanResults method.
@@ -130,6 +136,8 @@ private slots:
 	void receiveMessages();
 
 private:
+	QString mInterfaceFile;
+	QString mDaemonFile;
 	QScopedPointer<WpaSupplicantCommunicator> mControlInterface;
 	QScopedPointer<WpaSupplicantCommunicator> mMonitorInterface;
 	QScopedPointer<QSocketNotifier> mMonitorFileSocketNotifier;

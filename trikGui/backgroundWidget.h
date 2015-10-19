@@ -34,6 +34,8 @@
 
 #include "controller.h"
 #include "batteryIndicator.h"
+#include "wiFiIndicator.h"
+#include "openSocketIndicator.h"
 #include "startWidget.h"
 #include "runningWidget.h"
 
@@ -111,6 +113,9 @@ private:
 	QHBoxLayout mStatusBarLayout;
 	QStackedLayout mMainWidgetsLayout;
 	BatteryIndicator mBatteryIndicator;
+	WiFiIndicator mWiFiIndicator;
+	OpenSocketIndicator mMailboxIndicator;
+	OpenSocketIndicator mCommunicatorIndicator;
 	StartWidget mStartWidget;
 	RunningWidget mRunningWidget;
 	QScopedPointer<LazyMainWidget> mBrickDisplayWidgetWrapper;
