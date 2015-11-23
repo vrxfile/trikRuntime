@@ -71,7 +71,7 @@ void SystemSettingsWidget::renewFocus()
 
 QString SystemSettingsWidget::menuEntry()
 {
-	return QString(tr("System Settings"));
+	return QString(tr("System settings"));
 }
 
 void SystemSettingsWidget::keyPressEvent(QKeyEvent *event)
@@ -95,7 +95,7 @@ void SystemSettingsWidget::keyPressEvent(QKeyEvent *event)
 			break;
 		}
 		default: {
-			QWidget::keyPressEvent(event);
+			MainWidget::keyPressEvent(event);
 			break;
 		}
 	}

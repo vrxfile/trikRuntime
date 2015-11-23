@@ -31,6 +31,8 @@
 #endif
 
 #include <trikKernel/paths.h>
+#include <trikKernel/exceptions/trikRuntimeException.h>
+#include <QsLog.h>
 
 using namespace trikGui;
 
@@ -40,13 +42,25 @@ FileManagerWidget::FileManagerWidget(Controller &controller, MainWidget::FileMan
 	, mController(controller)
 {
 	QDir dir(trikKernel::Paths::userScriptsPath());
-	dir.mkdir(trikKernel::Paths::userScriptsDirectoryName());
-	QDir::setCurrent(trikKernel::Paths::userScriptsPath() + trikKernel::Paths::userScriptsDirectoryName());
+
+	if (!dir.exists()) {
+		const bool result = dir.mkpath(trikKernel::Paths::userScriptsPath());
+		if (!result) {
+			QLOG_ERROR() << "Incorrect user scripts directory";
+		}
+	}
+
+	if (dir.exists()) {
+		QDir::setCurrent(trikKernel::Paths::userScriptsPath());
+	} else {
+		// Fallback directory, if user scripts are unavailable for some reason.
+		QDir::setCurrent("/home/root/");
+	}
 
 	if (fileManagerRoot == MainWidget::FileManagerRootType::allFS) {
 		mRootDirPath = QDir::rootPath();
 	} else { // if (fileManagerRoot == MainWidget::FileManagerRootType::scriptsDir)
-		mRootDirPath = trikKernel::Paths::userScriptsPath() + trikKernel::Paths::userScriptsDirectoryName();
+		mRootDirPath = trikKernel::Paths::userScriptsPath();
 	}
 
 	mFileSystemModel.setRootPath(mRootDirPath);
@@ -145,9 +159,12 @@ void FileManagerWidget::onSelectionChanged(QModelIndex current, QModelIndex prev
 
 QString FileManagerWidget::currentPath()
 {
-	QString result = QDir::currentPath();
+	QString result = QDir(QDir::currentPath()).canonicalPath();
+
 	if (mRootDirPath != "/") {
-		result.replace(0, mRootDirPath.length(), "");
+		/// @todo: fix this.
+		const auto prefixLength = result.indexOf("scripts") + QString("scripts").length();
+		result = result.replace(0, prefixLength, "");
 	}
 
 	if (result.isEmpty()) {
@@ -162,7 +179,7 @@ void FileManagerWidget::showCurrentDir()
 	mCurrentPathLabel.setText(currentPath());
 
 	QDir::Filters filters = mFileSystemModel.filter();
-	if (QDir::currentPath() == mRootDirPath) {
+	if (QFileInfo(QDir::currentPath()) == QFileInfo(mRootDirPath)) {
 		filters |= QDir::NoDotDot;
 	} else {
 		filters &= ~QDir::NoDotDot;

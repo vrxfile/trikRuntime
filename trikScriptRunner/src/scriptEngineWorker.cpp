@@ -114,6 +114,7 @@ void ScriptEngineWorker::stopScript()
 		return;
 	}
 
+
 	while (mState == starting) {
 		// Some script is starting right now, so we are in inconsistent state. Let it start, then stop it.
 		QThread::yieldCurrentThread();
@@ -125,8 +126,15 @@ void ScriptEngineWorker::stopScript()
 
 	mScriptControl.reset();
 
+	if (mMailbox) {
+		mMailbox->stopWaiting();
+		/// @todo: here script will continue to execute and may execute some statements before it will eventually
+		/// be stopped by mThreading.reset(). But if we do mThreading.reset() before mMailbox->stopWaiting(),
+		/// we will get deadlock, since mMailbox->stopWaiting() shall be executed in already stopped thread.
+		/// Actually we shall stop script engines here, do mMailbox->stopWaiting(), then stop threads.
+	}
+
 	mThreading.reset();
-	mMailbox->stopWaiting();
 
 	if (mDirectScriptsEngine) {
 		mDirectScriptsEngine->abortEvaluation();
